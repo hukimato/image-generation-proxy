@@ -26,6 +26,6 @@ COPY ./php.ini /usr/local/etc/php/conf.d/php-custom.ini
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-WORKDIR /www/mysite.local
+WORKDIR /www/image-api.hu
 
 CMD composer install; php bin/doctrine.php orm:schema-tool:create; php-fpm

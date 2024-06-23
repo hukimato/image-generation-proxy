@@ -1,4 +1,4 @@
-name: "Deploy vps"
+name: "Deploy to timeweb server"
 on:
   push:
   pull_request:
@@ -23,7 +23,8 @@ jobs:
             docker compose down 
             cd .. 
             rm -rf ./previous
-            cp -r /www/image-api/current /www/image-api/previous
+            cp -r current previous
+            cd previous
             cp -f .env.example .env
             echo -e "\nNGINX_PORT=8082" >> .env
             echo -e "\nVERSION=previous" >> .env
@@ -40,9 +41,11 @@ jobs:
           script: |
             cd /www/image-api/current
             docker compose down 
-            rm -rf ./
+            cd ..
+            rm -rf ./current
             git clone git@github.com:hukimato/image-generation-proxy.git current
-            cp -f .env.example .env
+            cd current
+            cp .env.example .env
             echo -e "\nNGINX_PORT=8081" >> .env
             echo -e "\nVERSION=current" >> .env
             docker compose up -d --build

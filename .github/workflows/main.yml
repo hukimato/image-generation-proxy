@@ -22,7 +22,7 @@ jobs:
             cd /www/image-api/previous
             docker compose down 
             cd .. 
-            rm -rf ./previous
+            sudo rm -rf ./previous
             cp -r current previous
             cd previous
             cp -f .env.example .env
@@ -42,7 +42,7 @@ jobs:
             cd /www/image-api/current
             docker compose down 
             cd ..
-            rm -rf ./current
+            sudo rm -rf ./current
             git clone git@github.com:hukimato/image-generation-proxy.git current
             cd current
             cp .env.example .env

@@ -53,6 +53,9 @@ jobs:
             echo -e "\nHOST_GROUP_ID=$(id -g ${USER})" >> .env
             docker compose up -d --build
 
+  run-consumer:
+    runs-on: ubuntu-latest
+    steps:
       - name: "Run current php worker"
         uses: appleboy/ssh-action@v1.0.3
         with:

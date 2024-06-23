@@ -1,0 +1,48 @@
+name: "Deploy vps"
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      unused-port: ${{ steps.find-port.outputs.unused-port }}
+    steps:
+      - name: "Move current version to prev folder"
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /www/image-api/previous
+            docker compose down 
+            rm -rf ./
+            cp -r /www/image-api/current /www/image-api/previous
+            cp -f .env.example .env
+            echo -e "\nNGINX_PORT=8082" >> .env
+            echo -e "\nVERSION=previous" >> .env
+            docker compose up -d --build
+            docker exec -itd otus-php-previous php bin/app.php
+
+      - name: "Deploy new version into current"
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /www/image-api/current
+            docker compose down 
+            rm -rf ./
+            git clone git@github.com:hukimato/image-generation-proxy.git .
+            cp -f .env.example .env
+            echo -e "\nNGINX_PORT=8081" >> .env
+            echo -e "\nVERSION=current" >> .env
+            docker compose up -d --build
+            docker exec -itd otus-php-current php bin/app.php

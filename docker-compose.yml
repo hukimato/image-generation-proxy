@@ -6,7 +6,7 @@ services:
       context: ./docker/nginx
       dockerfile: Dockerfile
     image: "otus/nginx"
-    container_name: "otus-nginx"
+    container_name: "otus-nginx-${VERSION}"
     ports:
       - "${NGINX_PORT}:80"
     volumes:
@@ -22,7 +22,7 @@ services:
       context: ./docker/php-fpm
       dockerfile: Dockerfile
     image: "otus/fpm"
-    container_name: "otus-php"
+    container_name: "otus-php-${VERSION}"
     env_file:
       - .env
     volumes:

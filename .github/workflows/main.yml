@@ -41,7 +41,7 @@ jobs:
             cd /www/image-api/current
             docker compose down 
             rm -rf ./
-            git clone git@github.com:hukimato/image-generation-proxy.git .
+            git clone git@github.com:hukimato/image-generation-proxy.git current
             cp -f .env.example .env
             echo -e "\nNGINX_PORT=8081" >> .env
             echo -e "\nVERSION=current" >> .env

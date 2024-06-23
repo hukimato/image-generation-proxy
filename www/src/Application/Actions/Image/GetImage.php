@@ -24,7 +24,7 @@ class GetImage extends ImageAction
             throw new \Exception("Image is not ready");
         }
 
-        $host =  $this->request->getUri()->getScheme() . '://' . $this->request->getUri()->getHost();
+        $host = $this->request->getUri()->getScheme() . '://' . $this->request->getUri()->getHost();
 
         return $this->respondWithData(new ImageDTO(
             $image->getId(),

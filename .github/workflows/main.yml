@@ -27,8 +27,6 @@ jobs:
             cd previous
             cp -f .env.example .env
             echo -e "\nNGINX_PORT=8082" >> .env
-            echo -e "\nPOSTGRES_POST=5433" >> .env
-            echo -e "\nRABBITMQ_PORT=15673" >> .env
             echo -e "\nVERSION=previous" >> .env
             echo -e "\nHOST_USER_ID=$(id -u ${USER})" >> .env
             echo -e "\nHOST_GROUP_ID=$(id -g ${USER})" >> .env
@@ -64,4 +62,4 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd /www/image-api/current
-            docker exec -td otus-php-current php bin/app.php
+            docker exec -itd otus-php-current php bin/app.php

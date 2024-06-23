@@ -3,7 +3,7 @@
   "info": {
     "title": "PHP Image Generation API",
     "description": "PHP Image Generation API. Using YandexART, RabbitMQ, PostgreSQL and Slim:v4",
-    "version": "1.0.4"
+    "version": "1.0.5"
   },
   "servers": [
     {

@@ -31,8 +31,7 @@ jobs:
             echo -e "\nHOST_USER_ID=$(id -u ${USER})" >> .env
             echo -e "\nHOST_GROUP_ID=$(id -g ${USER})" >> .env
             docker compose up -d --build
-            docker exec -itd otus-php-previous php bin/app.php
-            chmod -R 777 .
+#            docker exec -itd otus-php-previous php bin/app.php
 
       - name: "Deploy new version into current"
         uses: appleboy/ssh-action@v1.0.3

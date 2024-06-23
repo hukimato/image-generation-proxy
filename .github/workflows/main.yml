@@ -52,5 +52,14 @@ jobs:
             echo -e "\nHOST_USER_ID=$(id -u ${USER})" >> .env
             echo -e "\nHOST_GROUP_ID=$(id -g ${USER})" >> .env
             docker compose up -d --build
-            docker exec -itd otus-php-current php bin/app.php
 
+      - name: "Run current php worker"
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /www/image-api/current
+            docker exec -td otus-php-current php bin/app.php

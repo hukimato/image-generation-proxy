@@ -28,6 +28,8 @@ jobs:
             cp -f .env.example .env
             echo -e "\nNGINX_PORT=8082" >> .env
             echo -e "\nVERSION=previous" >> .env
+            echo -e "\nHOST_USER_ID=$(id -u ${USER})" >> .env
+            echo -e "\nHOST_GROUP_ID=$(id -g ${USER})" >> .env
             docker compose up -d --build
             docker exec -itd otus-php-previous php bin/app.php
             chmod -R 777 .
@@ -49,6 +51,8 @@ jobs:
             cp .env.example .env
             echo -e "\nNGINX_PORT=8081" >> .env
             echo -e "\nVERSION=current" >> .env
+            echo -e "\nHOST_USER_ID=$(id -u ${USER})" >> .env
+            echo -e "\nHOST_GROUP_ID=$(id -g ${USER})" >> .env
             docker compose up -d --build
             docker exec -itd otus-php-current php bin/app.php
-            chmod -R 777 .
+

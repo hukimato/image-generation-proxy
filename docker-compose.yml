@@ -10,7 +10,7 @@ services:
     ports:
       - "${NGINX_PORT}:80"
     volumes:
-      - ./www:/www/mysite.local
+      - ./www:/www/image-api.hu
       - ${NGINX_LOGS_PATH}:/var/log/nginx/
     networks:
       - app-network
@@ -27,7 +27,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./www:/www/mysite.local
+      - ./www:/www/image-api.hu
       - ${PHP_LOGS_PATH}:/var/log/fpm-php.www.log
     networks:
       - app-network

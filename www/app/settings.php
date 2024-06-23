@@ -31,7 +31,7 @@ return function (ContainerBuilder $containerBuilder) {
                     'password' => getenv('POSTGRES_PASS'),
                     'dbname' => getenv('POSTGRES_DBNAME'),
                     'host' => getenv('POSTGRES_HOST'),
-                    'port' =>  (int) getenv('POSTGRES_POST'),
+                    'port' =>  (int) getenv('POSTGRES_PORT'),
                 ],
                 'rabbit' => [
                     'user' => getenv('RABBITMQ_USER'),

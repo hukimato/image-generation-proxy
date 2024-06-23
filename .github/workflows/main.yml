@@ -21,7 +21,8 @@ jobs:
           script: |
             cd /www/image-api/previous
             docker compose down 
-            rm -rf ./
+            cd .. 
+            rm -rf ./previous
             cp -r /www/image-api/current /www/image-api/previous
             cp -f .env.example .env
             echo -e "\nNGINX_PORT=8082" >> .env

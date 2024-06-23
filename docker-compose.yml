@@ -11,7 +11,7 @@ services:
       - "${NGINX_PORT}:80"
     volumes:
       - ./www:/www/mysite.local
-      - ./docker/logs/nginx:/var/log/nginx/
+      - ${NGINX_LOGS_PATH}:/var/log/nginx/
     networks:
       - app-network
     depends_on:
@@ -27,7 +27,7 @@ services:
       - .env
     volumes:
       - ./www:/www/mysite.local
-      - ./docker/logs/php.log:/var/log/fpm-php.www.log
+      - ${PHP_LOGS_PATH}:/var/log/fpm-php.www.log
     networks:
       - app-network
     depends_on:
@@ -45,7 +45,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./docker/postgresql/db-data:/var/lib/postgresql/data
+      - ${PGDATA_PATH}:/var/lib/postgresql/data
     networks:
       - app-network
 
@@ -59,7 +59,7 @@ services:
     ports:
       - "15672:15672"
     volumes:
-      - ./docker/rabbitmq:/var/lib/rabbitmq
+      - ${RABBITMQ_PATH}:/var/lib/rabbitmq
     networks:
       - app-network
 

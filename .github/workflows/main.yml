@@ -30,6 +30,7 @@ jobs:
             echo -e "\nVERSION=previous" >> .env
             docker compose up -d --build
             docker exec -itd otus-php-previous php bin/app.php
+            chmod -R 777 .
 
       - name: "Deploy new version into current"
         uses: appleboy/ssh-action@v1.0.3
@@ -50,3 +51,4 @@ jobs:
             echo -e "\nVERSION=current" >> .env
             docker compose up -d --build
             docker exec -itd otus-php-current php bin/app.php
+            chmod -R 777 .

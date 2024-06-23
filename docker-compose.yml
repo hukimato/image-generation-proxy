@@ -13,7 +13,7 @@ services:
       - ./www:/www/mysite.local
       - ${NGINX_LOGS_PATH}:/var/log/nginx/
     networks:
-      - app-network-${VERSION}
+      - app-network
     depends_on:
       - app
 
@@ -30,7 +30,7 @@ services:
       - ./www:/www/mysite.local
       - ${PHP_LOGS_PATH}:/var/log/fpm-php.www.log
     networks:
-      - app-network-${VERSION}
+      - app-network
     depends_on:
       - postgresql
       - rabbitmq
@@ -48,7 +48,7 @@ services:
     volumes:
       - ${PGDATA_PATH}:/var/lib/postgresql/data
     networks:
-      - app-network-${VERSION}
+      - app-network
 
   rabbitmq:
     image: rabbitmq:3.10.7-management
@@ -62,8 +62,8 @@ services:
     volumes:
       - ${RABBITMQ_PATH}:/var/lib/rabbitmq
     networks:
-      - app-network-${VERSION}
+      - app-network
 
 networks:
-  app-network-${VERSION}:
+  app-network:
     driver: bridge

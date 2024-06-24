@@ -23,11 +23,13 @@ class App
         $this->imageGenerator = $imageGener;
         $this->entityManager = $entityManager;
         $this->logger = $logger;
+        $this->logger->debug('App created');
     }
 
     public function run()
     {
         $message = $this->queue->getMessageOrNull();
+        $this->logger->debug('Trying to get message');
         if (!$message) {
             return;
         }

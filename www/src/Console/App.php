@@ -29,7 +29,6 @@ class App
     public function run()
     {
         $message = $this->queue->getMessageOrNull();
-        $this->logger->debug('Trying to get message');
         if (!$message) {
             return;
         }

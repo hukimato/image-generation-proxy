@@ -64,5 +64,5 @@ jobs:
           port: ${{ secrets.PORT }}
           request_pty: true
           script: |
-            cd /www/image-api/current
+            sleep 10
             docker exec -itd otus-php-current php bin/app.php

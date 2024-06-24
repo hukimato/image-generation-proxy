@@ -1,0 +1,29 @@
+name: "Roll back to previous version"
+on:
+  workflow_dispatch
+
+jobs:
+  shutdown-current:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Shutdown current containers"
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /www/image-api/current
+            docker compose down 
+
+      - name: "Turn on previous daemon"
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          request_pty: true
+          script: |
+            docker exec -itd otus-php-previous php bin/app.php

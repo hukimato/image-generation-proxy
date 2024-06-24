@@ -28,9 +28,11 @@ jobs:
             cp -f .env.example .env
             echo -e "\nNGINX_PORT=8082" >> .env
             echo -e "\nVERSION=previous" >> .env
+            echo -e "\nRABBITMQ_UI_PORT=15673" >> .env
+            echo -e "\nPOSTGRES_PORT=5432" >> .env
             echo -e "\nHOST_USER_ID=$(id -u ${USER})" >> .env
             echo -e "\nHOST_GROUP_ID=$(id -g ${USER})" >> .env
-#            docker compose up -d --build
+            docker compose up -d --build
 
       - name: "Deploy new version into current"
         uses: appleboy/ssh-action@v1.0.3
@@ -53,9 +55,6 @@ jobs:
             echo -e "\nHOST_GROUP_ID=$(id -g ${USER})" >> .env
             docker compose up -d --build
 
-  run-consumer:
-    runs-on: ubuntu-latest
-    steps:
       - name: "Run current php worker"
         uses: appleboy/ssh-action@v1.0.3
         with:

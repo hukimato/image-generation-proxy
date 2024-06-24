@@ -44,7 +44,7 @@ services:
       POSTGRES_DB: hukimato
       PGDATA: "/var/lib/postgresql/data/pgdata"
     ports:
-      - "5432:5432"
+      - "${POSTGRES_PORT}:5432"
     volumes:
       - ${PGDATA_PATH}:/var/lib/postgresql/data
     networks:
@@ -58,7 +58,7 @@ services:
       - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER}
       - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASS}
     ports:
-      - "15672:15672"
+      - "${RABBITMQ_UI_PORT}:15672"
     volumes:
       - ${RABBITMQ_PATH}:/var/lib/rabbitmq
     networks:

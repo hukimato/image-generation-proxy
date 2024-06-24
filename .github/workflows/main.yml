@@ -29,7 +29,7 @@ jobs:
             echo -e "\nNGINX_PORT=8082" >> .env
             echo -e "\nVERSION=previous" >> .env
             echo -e "\nRABBITMQ_UI_PORT=15673" >> .env
-            echo -e "\nPOSTGRES_PORT=5432" >> .env
+            echo -e "\nPOSTGRES_PORT=5433" >> .env
             echo -e "\nHOST_USER_ID=$(id -u ${USER})" >> .env
             echo -e "\nHOST_GROUP_ID=$(id -g ${USER})" >> .env
             docker compose up -d --build
